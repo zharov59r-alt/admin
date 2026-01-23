@@ -18,18 +18,18 @@ public class Controller {
     private final UserService userService;
     private final UserRepository userRepository;
 
-
+/*
     @GetMapping("/users")
     public List<User> showUserList() {
         return userRepository.findAll();
     }
 
-    /*
+    */
 
     @GetMapping("/users")
     public List<UserListDTO> showUserList() {
         return userService.showUserList();
     }
-*/
+
 
 }
