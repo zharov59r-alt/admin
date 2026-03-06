@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -27,15 +28,19 @@ public class User {
     private String email;
 
     @Column(name = "user_last_name", columnDefinition = "text", nullable = false)
-    private String last_name;
+    private String lastName;
 
     @Column(name = "user_first_name", columnDefinition = "text", nullable = false)
-    private String first_name;
+    private String firstName;
 
     @Column(name = "user_middle_name", columnDefinition = "text", nullable = false)
-    private String middle_name;
+    private String middleName;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @BatchSize(size = 10)
     private List<UserRole> userRoles = new ArrayList<>();
+
+    @Column(name = "search_text_vector", columnDefinition = "text", insertable = false, updatable = false)
+    private String searchTextVector;
 
 }
