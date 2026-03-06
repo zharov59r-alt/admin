@@ -11,9 +11,13 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<User,Long> {
-    List<UserName> findAllQweBy();
 
+    @Query (value = "SELECT u " +
+            "FROM User u" +
+            " WHERE :searchText is null or :searchText is not null and fts(u.searchTextVector, :searchText)")
+    List<User> findUserAll(@Param("searchText") String searchText);
 
+    /*
     @Query("SELECT new com.zharov.admin.dto.UserNameDTO(u.lastName, u.firstName, u.middleName) FROM User u")
     List<UserNameDTO> showAllUsers2();
 
@@ -24,12 +28,9 @@ public interface UserRepository extends JpaRepository<User,Long> {
             "JOIN ur.role r")
     List<UserRoleDTO> showUserRoles();
 
-/*
     @Query("SELECT u FROM User u WHERE fts(u.searchTextVector, :searchText)")
     List<User> getUserList(String searchText);
-*/
 
-/*
     @Query (value = "SELECT * " +
             "FROM admin.User u" +
             " WHERE :searchText is null or :searchText is not null and u.search_text_vector @@ plainto_tsquery(:searchText)",
@@ -37,9 +38,5 @@ public interface UserRepository extends JpaRepository<User,Long> {
     List<User> getUserList(@Param("searchText") String searchText);
 */
 
-    @Query (value = "SELECT u " +
-            "FROM User u" +
-            " WHERE :searchText is null or :searchText is not null and fts(u.searchTextVector, :searchText)")
-    List<User> getUserList(@Param("searchText") String searchText);
 
 }

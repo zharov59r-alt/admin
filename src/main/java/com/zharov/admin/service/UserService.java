@@ -1,21 +1,15 @@
 package com.zharov.admin.service;
 
-import com.zharov.admin.dto.UserListDTOBack;
-import com.zharov.admin.dto.UserListRequestDto;
-import com.zharov.admin.dto.UserRoleDTO;
-import com.zharov.admin.dto.UserRoleDTO2;
+import com.zharov.admin.dto.*;
 import com.zharov.admin.entity.User;
 import com.zharov.admin.mapper.UserMapper;
 import com.zharov.admin.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.random.RandomGenerator;
-
-import static java.util.stream.Collectors.toList;
 
 @Slf4j
 @Service
@@ -25,6 +19,14 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
+    public ResponseEntity<List<UserAllResponse>> findUserAll(UserAllRequest request) {
+        //String searchText = request.getSearchText();
+        List<User> users = userRepository.findUserAll("");
+        List<UserAllResponse> userResponseList = userMapper.toUserResponseList(users);
+        return ResponseEntity.ok(userResponseList);
+    }
+
+    /*
     public List<User> getUserList(UserListRequestDto request) {
 
         if (request.getSearchText() == null) {
@@ -35,7 +37,7 @@ public class UserService {
         return userRepository.getUserList(request.getSearchText());
     }
 
-    /*
+
     public List<UserListDTOBack> showUserList() {
         return userRepository.findAll()
                 .stream()

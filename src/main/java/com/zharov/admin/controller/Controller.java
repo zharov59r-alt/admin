@@ -1,26 +1,29 @@
 package com.zharov.admin.controller;
 
-import com.zharov.admin.dto.UserListRequestDto;
-import com.zharov.admin.dto.UserRoleDTO2;
+import com.zharov.admin.dto.UserAllRequest;
+import com.zharov.admin.dto.UserAllResponse;
 import com.zharov.admin.entity.User;
-import com.zharov.admin.repository.UserRepository;
 import com.zharov.admin.service.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class Controller {
 
     private final UserService userService;
-    private final UserRepository userRepository;
+
+    @PostMapping("/users")
+    public ResponseEntity<List<UserAllResponse>> findUserAll(@RequestBody UserAllRequest request) {
+        return userService.findUserAll(request);
+    }
+
+
 
 
     /*
@@ -31,11 +34,6 @@ public class Controller {
     */
 
 
-    @PostMapping("/userlist")
-    public List<User> getUserList(@RequestBody UserListRequestDto request) {
-
-        return userService.getUserList(request);
-    }
 
 
 /*

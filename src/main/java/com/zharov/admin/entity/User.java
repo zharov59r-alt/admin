@@ -1,18 +1,16 @@
 package com.zharov.admin.entity;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "user", schema = "admin")
@@ -33,12 +31,15 @@ public class User {
     @Column(name = "user_first_name", columnDefinition = "text", nullable = false)
     private String firstName;
 
-    @Column(name = "user_middle_name", columnDefinition = "text", nullable = false)
+    @Column(name = "user_middle_name", columnDefinition = "text")
     private String middleName;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user")
     @BatchSize(size = 10)
     private List<UserRole> userRoles = new ArrayList<>();
+
+    @Column(name = "creation_date", columnDefinition = "timestamp", nullable = false)
+    private LocalDateTime creationDate;
 
     @Column(name = "search_text_vector", columnDefinition = "text", insertable = false, updatable = false)
     private String searchTextVector;

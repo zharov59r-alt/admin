@@ -1,13 +1,15 @@
 package com.zharov.admin.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "role", schema = "admin")
@@ -22,7 +24,10 @@ public class Role {
     @Column(name = "role_name", columnDefinition = "text", nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
-    private Set<UserRole> userRoles = new HashSet<>();;
+    @Column(name = "role_description", columnDefinition = "text", nullable = false)
+    private String description;
+
+    @OneToMany(mappedBy = "role")
+    private Set<UserRole> userRoles = new HashSet<>();
 
 }
