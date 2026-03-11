@@ -2,9 +2,10 @@ package com.zharov.admin.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserAllResponse {
 
     private String email;

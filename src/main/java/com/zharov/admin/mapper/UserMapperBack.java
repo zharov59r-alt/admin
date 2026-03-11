@@ -14,6 +14,7 @@ import java.util.*;
 @Component
 public class UserMapperBack {
 
+    /*
     public UserListDTOBack toDto(User user) {
         String email = user.getEmail();
         List<UserRole> roles = user.getUserRoles();
@@ -47,6 +48,6 @@ public class UserMapperBack {
         return userRoleDTO2List;
 
     }
-
+*/
 
 }

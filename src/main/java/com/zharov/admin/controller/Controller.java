@@ -19,7 +19,7 @@ public class Controller {
     private final UserService userService;
 
     @PostMapping("/users")
-    public ResponseEntity<List<UserAllResponse>> findUserAll(@RequestBody UserAllRequest request) {
+    public ResponseEntity<List<UserAllResponse>> findUserAll(@RequestBody(required = false) UserAllRequest request) {
         return userService.findUserAll(request);
     }
 

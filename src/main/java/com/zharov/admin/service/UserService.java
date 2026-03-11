@@ -45,7 +45,7 @@ public class UserService {
                 .collect(toList());
     }
 
-    /*
+
     public Map<String, List<UserRoleDTO>> showUserRole() {
         return userRepository.showUserRoles()
                 .stream()
