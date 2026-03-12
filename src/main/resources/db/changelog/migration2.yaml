@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: zharov
+      changes:
+        - createSequence:
+            schemaName: admin
+            sequenceName: s_role1_id

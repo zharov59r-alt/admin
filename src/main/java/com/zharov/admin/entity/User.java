@@ -38,8 +38,8 @@ public class User {
     @BatchSize(size = 10)
     private List<UserRole> userRoles = new ArrayList<>();
 
- //   @Column(name = "creation_date", columnDefinition = "timestamp", nullable = false)
- //   private LocalDateTime creationDate;
+    @Column(name = "creation_date", columnDefinition = "timestamp", nullable = false)
+    private LocalDateTime creationDate;
 
     @Column(name = "search_text_vector", columnDefinition = "text", insertable = false, updatable = false)
     private String searchTextVector;
